@@ -16,7 +16,6 @@
                 :rules="emailRules"
                 v-model="email"></v-text-field>
               <v-text-field
-                id="password"
                 prepend-icon="lock"
                 name="password"
                 label="Password"
@@ -24,7 +23,6 @@
                 :rules="passwordRules"
                 v-model="password"></v-text-field>
               <v-text-field
-                id="password"
                 prepend-icon="repeat"
                 name="confirm-password"
                 label="Confirm Password"
@@ -38,7 +36,8 @@
             <v-btn
               @click="onSubmit"
               color="primary"
-              :disabled="!valid"
+              :disabled="!valid || loading"
+              :loading="loading"
             >Create account</v-btn>
           </v-card-actions>
         </v-card>
@@ -49,6 +48,7 @@
 
 <script>
   import AuthMixin from './AuthMixin';
+  import { userConst } from '../../store/constants';
 
   export default {
     name: 'Register',
@@ -68,7 +68,16 @@
             email: this.email,
             password: this.password
           };
+
+          this.$store.dispatch(userConst.registerUser, user)
+            .then(() => this.$router.push('/'))
+            .catch(() => {})
         }
+      }
+    },
+    computed: {
+      loading () {
+        return this.$store.getters.loading
       }
     },
     mixins: [AuthMixin]

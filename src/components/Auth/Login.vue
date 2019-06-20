@@ -30,7 +30,8 @@
             <v-btn
               @click="onSubmit"
               color="primary"
-              :disabled="!valid"
+              :loading="loading"
+              :disabled="!valid || loading"
             >Login</v-btn>
           </v-card-actions>
         </v-card>
@@ -41,6 +42,7 @@
 
 <script>
   import AuthMixin from './AuthMixin';
+  import { commonConst, userConst } from '../../store/constants';
 
   export default {
     name: 'Login',
@@ -51,7 +53,21 @@
             email: this.email,
             password: this.password
           };
+
+          this.$store.dispatch(userConst.loginUser, user)
+            .then(() => this.$router.push('/'))
+            .catch(() => {})
         }
+      }
+    },
+    computed: {
+      loading () {
+        return this.$store.getters.loading
+      }
+    },
+    created () {
+      if(this.$route.query['loginError']) {
+        this.$store.dispatch(commonConst.setError, 'Please login to access this page')
       }
     },
     mixins: [AuthMixin]
