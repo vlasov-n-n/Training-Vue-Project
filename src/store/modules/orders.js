@@ -50,8 +50,9 @@ export default {
             order.name,
             order.email,
             order.productId,
-            key,
+            order.ownId,
             order.done,
+            key,
           ));
         });
 
@@ -71,7 +72,8 @@ export default {
       try {
         await firebase.database().ref(`/users/${getters.user.id}/orders`).child(payload).update({
           done: true
-        })
+        });
+        commit(commonConst.setLoading, false);
       } catch (e) {
         commit(commonConst.setLoading, false);
         commit(commonConst.setError, e);

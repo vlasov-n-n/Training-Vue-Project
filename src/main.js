@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import './plugins/vuetify'
 import * as firebase from 'firebase/app';
 
 import './plugins/vuetify'
@@ -7,6 +8,7 @@ import router from './router'
 import store from './store';
 import { productConst, userConst } from './store/constants';
 import BuyDialog from './components/Common/BuyDialog';
+import { firebaseConfig } from '../config';
 
 Vue.config.productionTip = false;
 Vue.config.devtools = process.env.NODE_ENV === 'development';
@@ -22,10 +24,6 @@ new Vue({
   router,
   store,
   created() {
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      //Set your firebase config
-    };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     // Get auth user
