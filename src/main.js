@@ -24,13 +24,7 @@ new Vue({
   created() {
     // Your web app's Firebase configuration
     var firebaseConfig = {
-      apiKey: 'AIzaSyDobZ4FKKSXQrBWFsRJ5qS3SduyOXrCBQE',
-      authDomain: 'onlinestore-1aq1.firebaseapp.com',
-      databaseURL: 'https://onlinestore-1aq1.firebaseio.com',
-      projectId: 'onlinestore-1aq1',
-      storageBucket: 'onlinestore-1aq1.appspot.com',
-      messagingSenderId: '69391411930',
-      appId: '1:69391411930:web:a227752151f5eda9'
+      //Set your firebase config
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
